@@ -1,28 +1,16 @@
 {
-    "name": "less-plugin-inline-urls",
+    "name": "less-plugin-base64",
     "version": "1.2.0",
     "description": "inline images plugin",
     "homepage": "http://lesscss.org",
     "author": {
-        "name": "Luke Page"
-    },
-    "contributors": [
-        "The Core Less Team"
-    ],
-    "bugs": {
-        "url": "https://github.com/less/less-plugin-inline-urls/issues"
+        "name": "colin_xia"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/less/less-plugin-inline-urls.git"
     },
-    "licenses": [
-        {
-            "type": "Apache v2",
-            "url": "https://github.com/less/less-plugin-inline-urls/blob/master/LICENSE"
-        }
-    ],
-    "main": "lib/index.js",
+   "main": "lib/index.js",
     "engines": {
         "node": ">=0.4.2"
     },
@@ -31,7 +19,7 @@
     },
     "devDependencies": {
         "less": ">=2.0.0",
-	"diff": "^1.0"
+	    "diff": "^1.0"
     },
     "keywords": [
         "less plugins",

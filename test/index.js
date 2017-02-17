@@ -1,8 +1,10 @@
 var less = require("less"),
     lessTest = require("less/test/less-test"),
     lessTester = lessTest(),
-    plugin = require('../lib'),
+    lib = require('../lib'),
     stylize = less.lesscHelper.stylize;
+
+var plugin = new lib();
 
 console.log("\n" + stylize("LESS - inline images", 'underline') + "\n");
 

@@ -1,30 +1,71 @@
-[![NPM version](https://badge.fury.io/js/less-plugin-inline-urls.svg)](http://badge.fury.io/js/less-plugin-inline-urls) [![Dependencies](https://david-dm.org/less/less-plugin-inline-urls.svg)](https://david-dm.org/less/less-plugin-inline-urls) [![devDependency Status](https://david-dm.org/less/less-plugin-inline-urls/dev-status.svg)](https://david-dm.org/less/less-plugin-inline-urls#info=devDependencies) [![optionalDependency Status](https://david-dm.org/less/less-plugin-inline-urls/optional-status.svg)](https://david-dm.org/less/less-plugin-inline-urls#info=optionalDependencies)
+less-plugin-base64
+===========
 
-less-plugin-inline-urls
-=======================
+Gulp task for converting all files found within a stylesheet (those within a url( ... ) declaration) into base64-encoded data URI strings.
 
-Converts url("image.png") to data-uri's automatically, without having to write data-uri("image.png") in your less
+插件是复制 less-plugin-inline-urls 修改的, 因为我需要实现类似 gulp-base64 类似的效果。
 
-## lessc usage
+## Install
 
-```
-npm install -g less-plugin-inline-urls
-```
-
-and then on the command line,
+Install with [npm](https://npmjs.org)
 
 ```
-lessc file.less --inline-urls
+npm install less-plugin-base64 --save-dev
 ```
 
-## Programmatic usage
+## Example usage
+```js
+var gulp = require('gulp');
+var lessify = require("node-lessify");
+var lessPluginInlineUrls = require('less-plugin-inline-urls');
+var guitl = require('gulp-util');
+var inlineUrls = new lessPluginInlineUrls({
+    baseDir: 'public',
+    extensions: ['svg', 'png', 'gif', /\.jpg#datauri$/i],
+    maxImageSize: 8*1024, // bytes
+    debug: true
+});
 
+// example
+gulp.task('build', function () {
+    return gulp.src('./js/*.js')
+        .pipe(tap(function (file) {
+            gutil.log('bundling ' + file.path);
+            var b = browserify(file.path, {
+                debug: true
+            });
+
+            b.transform(lessify, {
+                compileOptions: {
+                    plugins: [inlineUrls]
+                }
+            });
+            file.contents = b.bundle();
+        }))
+        .pipe(gulp.dest('./public/js'));
+});
 ```
-var inline-urls-plugin = require('less-plugin-inline-urls');
-less.render(lessString, { plugins: [inline-urls-plugin] })
-  .then(
-```
+## Options
 
-## Browser usage
+  - `baseDir`  (String)
+    If you have absolute image paths in your stylesheet, the path specified
+    in this option will be used as the base directory (relative to gulpfile).
 
-Browser usage is not supported at this time and is blocked on data-uri which does not work in the browser (not sure why you would want it to).
+  - `deleteAfterEncoding`  (Boolean)
+    Set this to true to delete images after they've been encoded.
+    You'll want to do this in a staging area, and not in your source directories. Be careful.
+
+  - `extensions`  (Array of `String` or `RegExp`s)
+    Proccess only specified extensions.
+    Strings are matched against file-extension only, while RegExps are tested against the raw URL value.
+
+  - `exclude`  (Array of `String` or `RegExp`s)
+    Skip files with URLs that match these patterns.
+    Unlike with the `extensions` option Strings are sub-string matched against the whole URL value.
+
+  - `maxImageSize` (Number)
+    Maximum filesize in bytes for changing image to base64.
+
+  - `debug` (Boolean)
+    Enable log to console.
+
