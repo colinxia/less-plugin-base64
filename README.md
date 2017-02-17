@@ -3,7 +3,7 @@ less-plugin-base64
 
 Gulp task for converting all files found within a stylesheet (those within a url( ... ) declaration) into base64-encoded data URI strings.
 
-插件是复制 less-plugin-inline-urls 修改的, 因为我需要实现类似 gulp-base64 类似的效果。
+插件是复制 less-plugin-inline-urls 修改的, 因为我需要实现 gulp-base64 类似的效果。
 
 ## Install
 
@@ -17,7 +17,7 @@ npm install less-plugin-base64 --save-dev
 ```js
 var gulp = require('gulp');
 var lessify = require("node-lessify");
-var lessPluginInlineUrls = require('less-plugin-inline-urls');
+var lessPluginInlineUrls = require('less-plugin-base64');
 var guitl = require('gulp-util');
 var inlineUrls = new lessPluginInlineUrls({
     baseDir: 'public',
