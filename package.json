@@ -1,6 +1,6 @@
 {
     "name": "less-plugin-base64",
-    "version": "1.2.1",
+    "version": "1.2.3",
     "description": "inline images plugin",
     "homepage": "http://lesscss.org",
     "author": {
@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/less/less-plugin-inline-urls.git"
+        "url": "https://github.com/colinxia/less-plugin-base64.git"
     },
    "main": "lib/index.js",
     "engines": {
